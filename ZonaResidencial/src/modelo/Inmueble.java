@@ -4,21 +4,16 @@ import java.util.ArrayList;
 
 public class Inmueble {
 
-	private String nombre;
+	private String dueño;
+	private String arrendatario;
 	private Integer numeroInmueble;
 	private Double metrosCuadrados;
-	private String bloque;
+	private Double costoAdministracion;
 	private Integer capacidad;
-	private boolean calentador;
-	private ArrayList<Alcoba> alcobas;
-	private ArrayList<Cocina> cocinas;
-	private ArrayList<Baño> baños;
-	public String getNombre() {
-		return nombre;
-	}
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
+	private Integer numeroParqueaderos;
+	private String estado;
+	private boolean arrendado;
+
 	public Integer getNumeroInmueble() {
 		return numeroInmueble;
 	}
@@ -31,40 +26,42 @@ public class Inmueble {
 	public void setMetrosCuadrados(Double metrosCuadrados) {
 		this.metrosCuadrados = metrosCuadrados;
 	}
-	public String getBloque() {
-		return bloque;
-	}
-	public void setBloque(String bloque) {
-		this.bloque = bloque;
-	}
+
 	public Integer getCapacidad() {
 		return capacidad;
 	}
 	public void setCapacidad(Integer capacidad) {
 		this.capacidad = capacidad;
 	}
-	public boolean isCalentador() {
-		return calentador;
+	public String getDueño() {
+		return dueño;
 	}
-	public void setCalentador(boolean calentador) {
-		this.calentador = calentador;
+	public void setDueño(String dueño) {
+		this.dueño = dueño;
 	}
-	public ArrayList<Alcoba> getAlcobas() {
-		return alcobas;
+	public String getArrendatario() {
+		return arrendatario;
 	}
-	public void setAlcobas(ArrayList<Alcoba> alcobas) {
-		this.alcobas = alcobas;
+	public void setArrendatario(String arrendatario) {
+		this.arrendatario = arrendatario;
 	}
-	public ArrayList<Cocina> getCocinas() {
-		return cocinas;
+	public Double getCostoAdministracion() {
+		return costoAdministracion;
 	}
-	public void setCocinas(ArrayList<Cocina> cocinas) {
-		this.cocinas = cocinas;
+	public void setCostoAdministracion(Double costoAdministracion) {
+		this.costoAdministracion = costoAdministracion;
 	}
-	public ArrayList<Baño> getBaños() {
-		return baños;
+	public String getEstado() {
+		return estado;
 	}
-	public void setBaños(ArrayList<Baño> baños) {
-		this.baños = baños;
+	public void setEstado(String estado) {
+		this.estado = estado;
 	}
+	public boolean isArrendado() {
+		return arrendado;
+	}
+	public void setArrendado(boolean arrendado) {
+		this.arrendado = arrendado;
+	}
+
 }
