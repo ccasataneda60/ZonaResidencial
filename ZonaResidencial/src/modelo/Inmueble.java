@@ -6,20 +6,16 @@ public class Inmueble {
 
 	private String dueño;
 	private String arrendatario;
-	private Integer numeroInmueble;
+	private String codigoInmueble;
 	private Double metrosCuadrados;
 	private Double costoAdministracion;
-	private Integer capacidad;
 	private Integer numeroParqueaderos;
+	private Integer numeroBaños;
+	private Integer numeroAlcobas;
 	private String estado;
 	private boolean arrendado;
 
-	public Integer getNumeroInmueble() {
-		return numeroInmueble;
-	}
-	public void setNumeroInmueble(Integer numeroInmueble) {
-		this.numeroInmueble = numeroInmueble;
-	}
+
 	public Double getMetrosCuadrados() {
 		return metrosCuadrados;
 	}
@@ -27,12 +23,6 @@ public class Inmueble {
 		this.metrosCuadrados = metrosCuadrados;
 	}
 
-	public Integer getCapacidad() {
-		return capacidad;
-	}
-	public void setCapacidad(Integer capacidad) {
-		this.capacidad = capacidad;
-	}
 	public String getDueño() {
 		return dueño;
 	}
@@ -62,6 +52,30 @@ public class Inmueble {
 	}
 	public void setArrendado(boolean arrendado) {
 		this.arrendado = arrendado;
+	}
+	public Integer getNumeroParqueaderos() {
+		return numeroParqueaderos;
+	}
+	public void setNumeroParqueaderos(Integer numeroParqueaderos) {
+		this.numeroParqueaderos = numeroParqueaderos;
+	}
+	public Integer getNumeroBaños() {
+		return numeroBaños;
+	}
+	public void setNumeroBaños(Integer numeroBaños) {
+		this.numeroBaños = numeroBaños;
+	}
+	public Integer getNumeroAlcobas() {
+		return numeroAlcobas;
+	}
+	public void setNumeroAlcobas(Integer numeroAlcobas) {
+		this.numeroAlcobas = numeroAlcobas;
+	}
+	public String getCodigoInmueble() {
+		return codigoInmueble;
+	}
+	public void setCodigoInmueble(String codigoInmueble) {
+		this.codigoInmueble = codigoInmueble;
 	}
 
 }
