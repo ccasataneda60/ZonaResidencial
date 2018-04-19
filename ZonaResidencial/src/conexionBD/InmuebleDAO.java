@@ -12,7 +12,6 @@ import modelo.Inmueble;
 public class InmuebleDAO {
 	public void crearInmueble(Inmueble p) 
 	{
-		System.out.println("DAO");
 		ConexionBD conex= new ConexionBD();
 		try {
 			Statement sentencia = conex.getConnection().createStatement();
@@ -32,9 +31,7 @@ public class InmuebleDAO {
 					+p.getEstado()+"','"
 					+p.getCostoAdministracion()
 					+"')");
-			
-
-			JOptionPane.showMessageDialog(null, "Se ha registrado el inmueble","Información",JOptionPane.INFORMATION_MESSAGE);
+			//JOptionPane.showMessageDialog(null, "Se ha registrado el inmueble","Información",JOptionPane.INFORMATION_MESSAGE);
 			sentencia.close();
 			conex.desconectar();
     

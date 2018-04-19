@@ -12,6 +12,8 @@ import conexionBD.InmuebleDAO;
 import modelo.Apartamento;
 import modelo.Casa;
 import modelo.Inmueble;
+import negocio.NApartamento;
+import negocio.NCasa;
 
 import javax.swing.JTextField;
 import javax.swing.JLabel;
@@ -24,8 +26,10 @@ import javax.swing.JCheckBox;
 
 public class VInmueble extends JFrame implements ActionListener {
 	private Inmueble p = new Inmueble();
-	private Casa c;
-	private Apartamento a;
+	private Casa c=new Casa();
+	private Apartamento a=new Apartamento();
+	private NCasa nc=new NCasa();
+	private NApartamento na=new NApartamento();
 	private JPanel contentPane;
 	private JTextField dueñoJT;
 	private JTextField costoAdmin;
@@ -80,6 +84,7 @@ public class VInmueble extends JFrame implements ActionListener {
 	public VInmueble() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 500);
+		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -280,6 +285,7 @@ public class VInmueble extends JFrame implements ActionListener {
 	private void validarComboBox() {
 		tipoInmueble = (String) tipoInmuebleCB.getSelectedItem();
 		if (tipoInmueble.equals("Casa")) {
+			p=new Casa();
 			pisosCasa.setVisible(true);
 			pisosCasaCB.setVisible(true);
 			pisoApto.setVisible(false);
@@ -303,33 +309,38 @@ public class VInmueble extends JFrame implements ActionListener {
 	private void llenar() {
 		if (p instanceof Casa) {
 			if (si.isSelected()) {
-				c.llenarCasa(Integer.parseInt(dueñoJT.getText()), si.isSelected(),
+				nc.crearCasa(c.llenarCasa(Integer.parseInt(dueñoJT.getText()), si.isSelected(),
 						Double.parseDouble(costoAdmin.getText()), codigoInmuebleJT.getText(),
 						Double.parseDouble(metrosCuadrados.getText()), Integer.parseInt(arrendatarioJT.getText()),
 						(Integer) numeroAlcobasCB.getSelectedIndex(), (Integer) numeroBañosCB.getSelectedIndex(),
 						(Integer) nParqueaderosCB.getSelectedIndex(), (String) estadoInmuebleCB.getSelectedItem(),
-						pisosCasaCB.getSelectedIndex());
+						pisosCasaCB.getSelectedIndex()));
 			}
 
-			/*
-			 * System.out.
-			 * println("INSERT INTO inmueble (codigoInmueble,idpersona" +
-			 * ",metroscuadrados," + "idarrendatario," +
-			 * "numeroParqueaderos,numeroBanios,numeroAlcobas,arrendado," +
-			 * "estado,costoadministracion) VALUES  " +
-			 * "('"+p.getCodigoInmueble()+"', '"+p.getDueño()+"', '"
-			 * +p.getMetrosCuadrados()+"','" +p.getArrendatario()+"','"
-			 * //+p.getCapacidad()+"','" +p.getNumeroParqueaderos()+"','"
-			 * +p.getNumeroBaños()+"','" +p.getNumeroAlcobas()+"','"
-			 * +p.isArrendado()+"','" +p.getEstado()+"','"
-			 * +p.getCostoAdministracion() +"')");
-			 */
-			if (si.isSelected() == false) {
-				c.llenarCasa(Integer.parseInt(dueñoJT.getText()), si.isSelected(),
+			if (no.isSelected()) {
+				nc.crearCasa(c.llenarCasa(Integer.parseInt(dueñoJT.getText()), si.isSelected(),
 						Double.parseDouble(costoAdmin.getText()), codigoInmuebleJT.getText(),
 						Double.parseDouble(metrosCuadrados.getText()), 0, (Integer) numeroAlcobasCB.getSelectedIndex(),
 						(Integer) numeroBañosCB.getSelectedIndex(), (Integer) nParqueaderosCB.getSelectedIndex(),
-						(String) estadoInmuebleCB.getSelectedItem(), pisosCasaCB.getSelectedIndex());
+						(String) estadoInmuebleCB.getSelectedItem(), pisosCasaCB.getSelectedIndex()));
+			}
+		}
+		if (p instanceof Apartamento) {
+			if (si.isSelected()) {
+				a.llenarApartamento(Integer.parseInt(dueñoJT.getText()), si.isSelected(),
+						Double.parseDouble(costoAdmin.getText()), codigoInmuebleJT.getText(),
+						Double.parseDouble(metrosCuadrados.getText()), Integer.parseInt(arrendatarioJT.getText()),
+						(Integer) numeroAlcobasCB.getSelectedIndex(), (Integer) numeroBañosCB.getSelectedIndex(),
+						(Integer) nParqueaderosCB.getSelectedIndex(), (String) estadoInmuebleCB.getSelectedItem(),
+						pisoApto.getSelectedIndex());
+			}
+
+			if (no.isSelected()) {
+				a.llenarApartamento(Integer.parseInt(dueñoJT.getText()), si.isSelected(),
+						Double.parseDouble(costoAdmin.getText()), codigoInmuebleJT.getText(),
+						Double.parseDouble(metrosCuadrados.getText()), 0, (Integer) numeroAlcobasCB.getSelectedIndex(),
+						(Integer) numeroBañosCB.getSelectedIndex(), (Integer) nParqueaderosCB.getSelectedIndex(),
+						(String) estadoInmuebleCB.getSelectedItem(), pisoApto.getSelectedIndex());
 			}
 		}
 
@@ -340,6 +351,9 @@ public class VInmueble extends JFrame implements ActionListener {
 		validarcheck();
 		if (e.getSource() == guardar) {
 			llenar();
+		}
+		if(e.getSource()==cancelar){
+			this.setVisible(false);
 		}
 	}
 

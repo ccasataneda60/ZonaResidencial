@@ -1,12 +1,20 @@
 package negocio;
 
-import conexionBD.InmuebleDAO;
+import java.util.ArrayList;
+
+import conexionBD.*;
 import modelo.Casa;
 
 public class NCasa extends NInmueble {
-	private InmuebleDAO pDAO= new InmuebleDAO();
-	public void crearInmueble(Casa p){
-		pDAO.crearInmueble(p);
+	private CasaDAO cDAO= new CasaDAO();
+	private ArrayList<Casa> casas=new ArrayList<Casa>();
+	public void crearCasa(Casa p){
+		cDAO.crearInmueble(p);
+		cDAO.crearCasa(p);
+	}
+	public ArrayList<Casa> listarCasas(){
+		casas=cDAO.listarCasas();
+		return casas;
 	}
 
 }

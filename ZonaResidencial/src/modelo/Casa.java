@@ -23,6 +23,7 @@ public class Casa extends Inmueble {
 		p.setNumeroBaños(nBaños);
 		p.setNumeroParqueaderos(nPArqueaderos);
 		p.setPisos(piso);
+		p.setArrendatario(idA);
 		
 		
 		return p;
