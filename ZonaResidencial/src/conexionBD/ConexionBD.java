@@ -1,8 +1,6 @@
 package conexionBD;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class ConexionBD {
 	   /**Parametros de conexion*/
@@ -21,7 +19,7 @@ public class ConexionBD {
 	         connection = DriverManager.getConnection(url,login,password);
 	 
 	         if (connection!=null){
-	          // System.out.println("Conexión a base de datos "+bd+" OK\n");
+	           System.out.println("Conexión a base de datos "+bd+" OK\n");
 	         }
 	      }
 	      catch(SQLException e){

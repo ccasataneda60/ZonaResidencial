@@ -1,11 +1,12 @@
 package negocio;
 
 import conexionBD.InmuebleDAO;
-import modelo.Inmueble;
+import modelo.Casa;
 
-public class NInmueble {
+public class NCasa extends NInmueble {
 	private InmuebleDAO pDAO= new InmuebleDAO();
-	public void crearInmueble(Inmueble p){
+	public void crearInmueble(Casa p){
 		pDAO.crearInmueble(p);
 	}
+
 }

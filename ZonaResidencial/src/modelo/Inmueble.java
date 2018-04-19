@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public class Inmueble {
 
-	private String dueño;
-	private String arrendatario;
+	private Integer dueño;
+	private Integer arrendatario;
 	private String codigoInmueble;
 	private Double metrosCuadrados;
 	private Double costoAdministracion;
@@ -14,7 +14,7 @@ public class Inmueble {
 	private Integer numeroAlcobas;
 	private String estado;
 	private boolean arrendado;
-
+	private Inmueble p;
 
 	public Double getMetrosCuadrados() {
 		return metrosCuadrados;
@@ -23,16 +23,16 @@ public class Inmueble {
 		this.metrosCuadrados = metrosCuadrados;
 	}
 
-	public String getDueño() {
+	public Integer getDueño() {
 		return dueño;
 	}
-	public void setDueño(String dueño) {
+	public void setDueño(Integer dueño) {
 		this.dueño = dueño;
 	}
-	public String getArrendatario() {
+	public Integer getArrendatario() {
 		return arrendatario;
 	}
-	public void setArrendatario(String arrendatario) {
+	public void setArrendatario(Integer arrendatario) {
 		this.arrendatario = arrendatario;
 	}
 	public Double getCostoAdministracion() {
@@ -76,6 +76,21 @@ public class Inmueble {
 	}
 	public void setCodigoInmueble(String codigoInmueble) {
 		this.codigoInmueble = codigoInmueble;
+	}
+	public Inmueble llenarInmueble(Integer dueño, boolean isArrendado, Double costo, String codigo, Double m2, Integer idA,
+			Integer nAlcobas, Integer nBaños, Integer nPArqueaderos, String estado, Integer piso){
+		p= new Inmueble();
+		p.setArrendado(isArrendado);
+		p.setArrendatario(idA);
+		p.setCodigoInmueble(codigo);
+		p.setCostoAdministracion(costo);
+		p.setDueño(dueño);
+		p.setEstado(estado);
+		p.setMetrosCuadrados(m2);
+		p.setNumeroAlcobas(nAlcobas);
+		p.setNumeroBaños(nBaños);
+		p.setNumeroParqueaderos(nPArqueaderos);
+		return p;
 	}
 
 }
