@@ -31,14 +31,9 @@ public class VCasaL extends JFrame implements ActionListener {
 	private JButton cerrar;
 	private JButton modificar;
 	private JButton eliminar;
-	private JLabel cabecera;
-	private JLabel nombreM;
-	private JLabel apellido;
-	private JLabel espacio;
-	private JLabel especialidad;
-	private JLabel cedula;
-	private JLabel telefono;
 	private JTable table;
+	private Integer row;
+	private Integer column;
 	private ArrayList<Casa> m=new ArrayList<Casa>();
 	private NCasa c = new NCasa();
 	private CasaDAO me= new CasaDAO();
@@ -92,8 +87,8 @@ public class VCasaL extends JFrame implements ActionListener {
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				int column=table.getColumnModel().getColumnIndexAtX(e.getX());
-				int row=e.getY()/table.getRowHeight();
+				column=table.getColumnModel().getColumnIndexAtX(e.getX());
+				row=e.getY()/table.getRowHeight();
 				
 				if(row<table.getRowCount() && row >=0 && column<table.getColumnCount()&& column>=0){
 					Object value= table.getValueAt(row, column);
@@ -101,7 +96,8 @@ public class VCasaL extends JFrame implements ActionListener {
 						((JButton)value).doClick();
 						JButton boton= (JButton) value;
 						if(boton.getName().equals("modificar")){
-							System.out.println("Modificar "+row);
+							VInmuebleM cm= new VInmuebleM(m.get(row));
+							cm.setVisible(true);
 						}
 						
 						if(boton.getName().equals("eliminar")){
@@ -134,20 +130,18 @@ public class VCasaL extends JFrame implements ActionListener {
 		
 		modificar = new JButton("Modificar");
 		modificar.setName("modificar");
+
 		
 		eliminar = new JButton("Eliminar");
 		eliminar.setName("eliminar");
+
 		
 	}
 	public void actionPerformed(ActionEvent e) {
-			try {
-				setVisible(false);
-			} catch (Exception e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-				
-			}
-		
+		if(e.getSource()==modificar){
+			
+			
+		}		
 		
 	}
 }

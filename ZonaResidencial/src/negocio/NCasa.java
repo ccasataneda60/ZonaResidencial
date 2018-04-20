@@ -16,5 +16,9 @@ public class NCasa extends NInmueble {
 		casas=cDAO.listarCasas();
 		return casas;
 	}
+	public Casa buscaCasa(String codigo){
+		return cDAO.consultarMedico(codigo);
+		
+	}
 
 }

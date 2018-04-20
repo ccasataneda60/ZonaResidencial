@@ -1,35 +1,30 @@
 package vista;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import conexionBD.ConexionBD;
-import conexionBD.InmuebleDAO;
 import modelo.Apartamento;
 import modelo.Casa;
 import modelo.Inmueble;
 import negocio.NApartamento;
 import negocio.NCasa;
 
-import javax.swing.JTextField;
-import javax.swing.JLabel;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JCheckBox;
-
-public class VInmueble extends JFrame implements ActionListener {
+public class VInmuebleM extends JFrame implements ActionListener {
 	private Inmueble p = new Inmueble();
 	private Casa c=new Casa();
 	private Apartamento a=new Apartamento();
 	private NCasa nc=new NCasa();
-	private NApartamento na=new NApartamento();
 	private JPanel contentPane;
 	private JTextField dueñoJT;
 	private JTextField costoAdmin;
@@ -56,8 +51,8 @@ public class VInmueble extends JFrame implements ActionListener {
 	private JComboBox pisoApto;
 	private JCheckBox no;
 	private JCheckBox si;
-	private JButton btnBuscarDueño;
-	private JButton btnRegistrarDueño;
+	private JButton btnAgregarDueño;
+	private JButton btnModificarD;
 	private JButton registrarArrendatario;
 	private JButton guardar;
 	private JButton cancelar;
@@ -65,23 +60,7 @@ public class VInmueble extends JFrame implements ActionListener {
 	private JLabel codigoInmueble;
 	private JTextField codigoInmuebleJT;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					VInmueble frame = new VInmueble();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	public VInmueble() {
+	public VInmuebleM(Inmueble casaCargada) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 550, 500);
 		setLocationRelativeTo(null);
@@ -89,15 +68,16 @@ public class VInmueble extends JFrame implements ActionListener {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		this.etiqueta();
-		this.campos();
-		this.combobox();
-		this.checkbox();
-		this.botones();
+		p=casaCargada;
+		this.etiqueta(casaCargada);
+		this.campos(casaCargada);
+		this.combobox(casaCargada);
+		this.checkbox(casaCargada);
+		this.botones(casaCargada);
 
 	}
 
-	private void etiqueta() {
+	private void etiqueta(Inmueble casaCargada) {
 		dueñoE = new JLabel("Due\u00F1o del inmueble");
 		dueñoE.setBounds(32, 57, 163, 14);
 		contentPane.add(this.dueñoE);
@@ -150,7 +130,7 @@ public class VInmueble extends JFrame implements ActionListener {
 		pisosCasa.setVisible(false);
 	}
 
-	private void campos() {
+	private void campos(Inmueble casaCargada) {
 
 		arrendatarioJT = new JTextField();
 		arrendatarioJT.setColumns(10);
@@ -159,81 +139,91 @@ public class VInmueble extends JFrame implements ActionListener {
 		contentPane.add(arrendatarioJT);
 
 		metrosCuadrados = new JTextField();
+		metrosCuadrados.setText(String.valueOf(casaCargada.getMetrosCuadrados()));
 		metrosCuadrados.setBounds(185, 226, 76, 20);
 		contentPane.add(metrosCuadrados);
 		metrosCuadrados.setColumns(10);
 
 		costoAdmin = new JTextField();
 		costoAdmin.setBounds(185, 201, 76, 20);
+		costoAdmin.setText(String.valueOf(casaCargada.getCostoAdministracion()));
 		contentPane.add(costoAdmin);
 		costoAdmin.setColumns(10);
 
 		dueñoJT = new JTextField();
-		dueñoJT.setBounds(151, 54, 136, 20);
+		dueñoJT.setText(String.valueOf(casaCargada.getDueño()));
+		dueñoJT.setBounds(151, 54, 100, 20);
 		contentPane.add(dueñoJT);
 		dueñoJT.setColumns(10);
+		
+		codigoInmuebleJT = new JTextField();
+		codigoInmuebleJT.setText(String.valueOf(casaCargada.getCodigoInmueble()));
+		codigoInmuebleJT.setBounds(185, 104, 76, 20);
+		contentPane.add(codigoInmuebleJT);
+		codigoInmuebleJT.setColumns(10);
 
 	}
 
-	private void botones() {
-		btnBuscarDueño = new JButton("Buscar");
-		btnBuscarDueño.setBounds(292, 53, 76, 23);
-		contentPane.add(btnBuscarDueño);
+	private void botones(Inmueble casaCargada) {
+		btnAgregarDueño = new JButton("Adicionar Dueño");
+		btnAgregarDueño.setBounds(256, 53, 122, 23);
+		contentPane.add(btnAgregarDueño);
 
 		guardar = new JButton("Guardar");
-		guardar.setBounds(115, 374, 135, 23);
+		guardar.setBounds(126, 374, 135, 23);
 		guardar.addActionListener(this);
 		contentPane.add(guardar);
 
 		cancelar = new JButton("Cancelar");
-		cancelar.setBounds(306, 374, 135, 23);
+		cancelar.setBounds(307, 374, 135, 23);
 		cancelar.addActionListener(this);
 		contentPane.add(cancelar);
 
-		btnRegistrarDueño = new JButton("Registrar Due\u00F1o");
-		btnRegistrarDueño.setBounds(368, 53, 135, 23);
-		contentPane.add(btnRegistrarDueño);
+		btnModificarD = new JButton("Modificar Dueño");
+		btnModificarD.setBounds(388, 53, 121, 23);
+		contentPane.add(btnModificarD);
 
 		registrarArrendatario = new JButton("Registrar Arrendatario");
-		registrarArrendatario.setBounds(332, 328, 171, 23);
+		registrarArrendatario.setBounds(338, 328, 171, 23);
 		registrarArrendatario.setVisible(false);
 		contentPane.add(registrarArrendatario);
 
 		codigoInmueble = new JLabel("C\u00F3digo Inmueble");
 		codigoInmueble.setBounds(32, 107, 122, 14);
 		contentPane.add(codigoInmueble);
-
-		codigoInmuebleJT = new JTextField();
-		codigoInmuebleJT.setBounds(185, 104, 76, 20);
-		contentPane.add(codigoInmuebleJT);
-		codigoInmuebleJT.setColumns(10);
 	}
 
-	private void combobox() {
+	private void combobox(Inmueble casaCargada) {
 
 		numeroBañosCB = new JComboBox();
 		numeroBañosCB.setModel(new DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5" }));
+		numeroBañosCB.setSelectedIndex(casaCargada.getNumeroBaños()-1);
 		numeroBañosCB.setBounds(185, 126, 76, 20);
 		contentPane.add(numeroBañosCB);
 
 		numeroAlcobasCB = new JComboBox();
 		numeroAlcobasCB.setModel(new DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5" }));
+		numeroAlcobasCB.setSelectedIndex(casaCargada.getNumeroAlcobas());
 		numeroAlcobasCB.setBounds(185, 151, 76, 20);
 		contentPane.add(numeroAlcobasCB);
 
 		nParqueaderosCB = new JComboBox();
 		nParqueaderosCB.setModel(new DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5" }));
+		nParqueaderosCB.setSelectedIndex(casaCargada.getNumeroParqueaderos()-1);
 		nParqueaderosCB.setBounds(185, 176, 76, 20);
 		contentPane.add(nParqueaderosCB);
 
-		tipoInmuebleCB = new JComboBox();
-		tipoInmuebleCB.setModel(new DefaultComboBoxModel(new String[] { "Seleccionar", "Casa", "Apartamento" }));
-		tipoInmuebleCB.setBounds(185, 79, 100, 20);
-		tipoInmuebleCB.addActionListener(this);
-		contentPane.add(tipoInmuebleCB);
-
 		estadoInmuebleCB = new JComboBox();
 		estadoInmuebleCB.setModel(new DefaultComboBoxModel(new String[] { "Bueno", "Regular", "Malo" }));
+		if(casaCargada.getEstado().equals("Bueno")){
+			estadoInmuebleCB.setSelectedIndex(0);
+		}
+		if(casaCargada.getEstado().equals("Regular")){
+			estadoInmuebleCB.setSelectedIndex(1);
+		}
+		if(casaCargada.getEstado().equals("Malo")){
+			estadoInmuebleCB.setSelectedIndex(2);
+		}
 		estadoInmuebleCB.setBounds(185, 251, 76, 20);
 		contentPane.add(estadoInmuebleCB);
 
@@ -247,17 +237,42 @@ public class VInmueble extends JFrame implements ActionListener {
 		pisoApto.setBounds(185, 276, 76, 20);
 		contentPane.add(pisoApto);
 		pisoApto.setVisible(false);
+		
+		tipoInmuebleCB = new JComboBox();
+		tipoInmuebleCB.setModel(new DefaultComboBoxModel(new String[] { "Seleccionar", "Casa", "Apartamento" }));
+		if(casaCargada instanceof Casa){
+			System.out.println("Casa");
+			tipoInmuebleCB.setSelectedIndex(1);
+			pisosCasa.setVisible(true);
+			pisosCasaCB.setVisible(true);
+			pisoApto.setVisible(false);
+			pisoAptoLB.setVisible(false);
+		}
+		if(casaCargada instanceof Apartamento){
+			tipoInmuebleCB.setSelectedIndex(2);
+			pisosCasa.setVisible(false);
+			pisosCasaCB.setVisible(false);
+			pisoApto.setVisible(true);
+			pisoAptoLB.setVisible(true);
+		}
+		tipoInmuebleCB.setBounds(185, 79, 100, 20);
+		tipoInmuebleCB.addActionListener(this);
+		contentPane.add(tipoInmuebleCB);
 	}
 
-	private void checkbox() {
+	private void checkbox(Inmueble casaCargada) {
 		si = new JCheckBox("Si");
 		si.setBounds(185, 300, 42, 23);
 		si.addActionListener(this);
+		si.setSelected(casaCargada.isArrendado());
+		si.setEnabled(casaCargada.isArrendado());
 		contentPane.add(si);
 
 		no = new JCheckBox("No");
 		no.setBounds(228, 300, 44, 23);
 		no.addActionListener(this);
+		no.setSelected(!casaCargada.isArrendado());
+		no.setEnabled(!casaCargada.isArrendado());
 		contentPane.add(no);
 	}
 
@@ -292,6 +307,7 @@ public class VInmueble extends JFrame implements ActionListener {
 			pisoAptoLB.setVisible(false);
 		}
 		if (tipoInmueble.equals("Apartamento")) {
+			p=new Apartamento();
 			pisosCasa.setVisible(false);
 			pisosCasaCB.setVisible(false);
 			pisoApto.setVisible(true);
@@ -317,7 +333,7 @@ public class VInmueble extends JFrame implements ActionListener {
 						pisosCasaCB.getSelectedIndex()));
 			}
 
-			if (no.isSelected()) {
+			if (no.isSelected()) { 
 				nc.crearCasa(c.llenarCasa(Integer.parseInt(dueñoJT.getText()), si.isSelected(),
 						Double.parseDouble(costoAdmin.getText()), codigoInmuebleJT.getText(),
 						Double.parseDouble(metrosCuadrados.getText()), 0, (Integer) numeroAlcobasCB.getSelectedIndex(),
@@ -346,7 +362,7 @@ public class VInmueble extends JFrame implements ActionListener {
 
 	}
 
-	public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(ActionEvent e)  {
 		validarComboBox();
 		validarcheck();
 		if (e.getSource() == guardar) {
